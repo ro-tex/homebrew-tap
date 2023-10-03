@@ -1,11 +1,7 @@
-# Ro-tex Unique
+# homebrew-tap
 
 ## How do I install these formulae?
 
-`brew install ro-tex/unique/<formula>`
+`brew install ro-tex/tap/unique`
 
-Or `brew tap ro-tex/unique` and then `brew install <formula>`.
-
-## Documentation
-
-`brew help`, `man brew` or check [Homebrew's documentation](https://docs.brew.sh).
+Or `brew tap ro-tex/tap` and then `brew install unique`.
