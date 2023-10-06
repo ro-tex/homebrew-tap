@@ -8,8 +8,6 @@ class Unique < Formula
   version "0.0.5"
   license "MIT"
 
-  depends_on "go"
-
   on_macos do
     if Hardware::CPU.arm?
       url "https://github.com/ro-tex/unique/releases/download/v0.0.5/unique_0.0.5_darwin_arm64.tar.gz", using: CurlDownloadStrategy
