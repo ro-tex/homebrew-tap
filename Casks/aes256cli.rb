@@ -4,21 +4,21 @@ cask "aes256cli" do
 
   on_macos do
     on_arm do
-      sha256 "a7e375c313c23f7164338fc3aff7726edec146dee3b9a016f922bfe452ba822c"
+      sha256 "297eeb81d66d7fd3bd31e383d3509edf760f7fa9e90ceb9d50a9e6361d9b51f7"
       url "https://github.com/ro-tex/aes256cli/releases/download/v#{version}/aes256cli_#{version}_darwin_arm64.tar.gz"
     end
     on_intel do
-      sha256 "e4bf11db6ba011986bbda8525b04a1ca07fa366eb05e22029dc2a3b5aef99df7"
+      sha256 "52690836c351f5ca2999a8474597bdc766c6b912ea2a065d852b16dced4f1c6a"
       url "https://github.com/ro-tex/aes256cli/releases/download/v#{version}/aes256cli_#{version}_darwin_amd64.tar.gz"
     end
   end
   on_linux do
     on_arm do
-      sha256 "4d79a9b14d7cf7237fb37f77ee925b51e892ed53aef8aecd1bc2638c9f8630c9"
+      sha256 "5d9d2d12ceacb37de82b290edbc21e94a36c642eeb8882f6725c921d8a114925"
       url "https://github.com/ro-tex/aes256cli/releases/download/v#{version}/aes256cli_#{version}_linux_arm64.tar.gz"
     end
     on_intel do
-      sha256 "8a771b00310c175278b01e973c6a7a5664bb0c4fb639a9d131af19ce813cabec"
+      sha256 "2b9c2c9db398bc8f6effd3159d0ea8e3b75078f05f7b4ffb1a4b2d8458d16a2c"
       url "https://github.com/ro-tex/aes256cli/releases/download/v#{version}/aes256cli_#{version}_linux_amd64.tar.gz"
     end
   end
