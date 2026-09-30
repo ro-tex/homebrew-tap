@@ -1,22 +1,12 @@
 # homebrew-tap
 
-## Casks
+## Formulae
 
-- [unique](https://github.com/ro-tex/unique): outputs the unique lines of its input.
-- [aes256cli](https://github.com/ro-tex/aes256cli): encrypt and decrypt files with AES-256.
+- [unique](https://github.com/ro-tex/unique): a simple tool that outputs the unique lines of its input.
+- [aes256cli](https://github.com/ro-tex/aes256cli): a simple file encrypt/decrypt tool.
 
-## How do I install these casks?
+## How do I install these formulae?
 
-`brew install --cask ro-tex/tap/<cask>`
+`brew install ro-tex/tap/<formula>`
 
-Or `brew tap ro-tex/tap` and then `brew install --cask <cask>`.
-
-## Upgrading from the `unique` formula
-
-`unique` used to be a formula and is now a cask. `brew update` only moves you
-over automatically in some setups, so switch by hand:
-
-```sh
-brew uninstall --formula --force unique   # or unique@0 / unique@0.0 / unique@0.0.5
-brew install --cask ro-tex/tap/unique
-```
+Or `brew tap ro-tex/tap` and then `brew install <formula>`.
