@@ -5,25 +5,21 @@ cask "unique" do
   on_macos do
     on_arm do
       sha256 "813089f69114eff4ddb9ed7450829780ed6710a42c7249fb1ced4c19a774c06a"
-      url "https://github.com/ro-tex/unique/releases/download/v#{version}/unique_#{version}_darwin_arm64.tar.gz",
-        verified: "github.com/ro-tex/unique/"
+      url "https://github.com/ro-tex/unique/releases/download/v#{version}/unique_#{version}_darwin_arm64.tar.gz"
     end
     on_intel do
       sha256 "c2a6d8f89e264a5123295119d480de2325f5b020afaa893c6034a344b0719039"
-      url "https://github.com/ro-tex/unique/releases/download/v#{version}/unique_#{version}_darwin_amd64.tar.gz",
-        verified: "github.com/ro-tex/unique/"
+      url "https://github.com/ro-tex/unique/releases/download/v#{version}/unique_#{version}_darwin_amd64.tar.gz"
     end
   end
   on_linux do
     on_arm do
       sha256 "6cff48ec5d8d3ccf6b2ec98491303e9f726397c0d3ca15a37599e589f20d7552"
-      url "https://github.com/ro-tex/unique/releases/download/v#{version}/unique_#{version}_linux_arm64.tar.gz",
-        verified: "github.com/ro-tex/unique/"
+      url "https://github.com/ro-tex/unique/releases/download/v#{version}/unique_#{version}_linux_arm64.tar.gz"
     end
     on_intel do
       sha256 "82febe7f1b0e52367049a73c26b62c57d79e24c2b64e76b2393ede87da88940d"
-      url "https://github.com/ro-tex/unique/releases/download/v#{version}/unique_#{version}_linux_amd64.tar.gz",
-        verified: "github.com/ro-tex/unique/"
+      url "https://github.com/ro-tex/unique/releases/download/v#{version}/unique_#{version}_linux_amd64.tar.gz"
     end
   end
 
@@ -36,6 +32,14 @@ cask "unique" do
   end
 
   binary "unique"
+
+  postflight_steps do
+    on_macos do
+      # The binary is not signed, so remove the quarantine attribute
+      # to keep macOS Gatekeeper from blocking it.
+      run "/usr/bin/xattr", args: ["-dr", "com.apple.quarantine", "{{staged_path}}/unique"]
+    end
+  end
 
   # No zap stanza required
 end

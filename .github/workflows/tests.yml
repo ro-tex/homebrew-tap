@@ -1,44 +1,30 @@
-name: brew test-bot
+name: casks
 on:
   push:
     branches:
       - main
   pull_request:
 jobs:
-  test-bot:
+  test:
     strategy:
+      fail-fast: false
       matrix:
-        os: [ubuntu-22.04, macos-13]
+        os: [ubuntu-latest, macos-latest]
     runs-on: ${{ matrix.os }}
     steps:
+      # In a homebrew-* repository this checks out the repo and links it
+      # into Homebrew as the ro-tex/tap tap.
       - name: Set up Homebrew
-        id: set-up-homebrew
-        uses: Homebrew/actions/setup-homebrew@master
+        uses: Homebrew/actions/setup-homebrew@main
 
-      - name: Cache Homebrew Bundler RubyGems
-        id: cache
-        uses: actions/cache@v3
-        with:
-          path: ${{ steps.set-up-homebrew.outputs.gems-path }}
-          key: ${{ runner.os }}-rubygems-${{ steps.set-up-homebrew.outputs.gems-hash }}
-          restore-keys: ${{ runner.os }}-rubygems-
+      - run: brew style ro-tex/tap
 
-      - name: Install Homebrew Bundler RubyGems
-        if: steps.cache.outputs.cache-hit != 'true'
-        run: brew install-bundler-gems
+      - run: brew audit --cask --strict --online --tap ro-tex/tap
 
-      - run: brew test-bot --only-cleanup-before
-
-      - run: brew test-bot --only-setup
-
-      - run: brew test-bot --only-tap-syntax
-
-      - run: brew test-bot --only-formulae
-        if: github.event_name == 'pull_request'
-
-      - name: Upload bottles as artifact
-        if: always() && github.event_name == 'pull_request'
-        uses: actions/upload-artifact@main
-        with:
-          name: bottles
-          path: '*.bottle.*'
+      - name: Install each cask
+        run: |
+          for cask in Casks/*.rb; do
+            name="ro-tex/tap/$(basename "$cask" .rb)"
+            brew install --cask "$name"
+            brew uninstall --cask "$name"
+          done

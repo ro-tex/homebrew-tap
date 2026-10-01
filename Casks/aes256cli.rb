@@ -24,7 +24,7 @@ cask "aes256cli" do
   end
 
   name "aes256cli"
-  desc "A simple file encrypt/decrypt tool using AES-256."
+  desc "Encrypt and decrypt files with AES-256"
   homepage "https://github.com/ro-tex/aes256cli"
 
   livecheck do
@@ -33,11 +33,11 @@ cask "aes256cli" do
 
   binary "aes256cli"
 
-  postflight do
-    if OS.mac?
+  postflight_steps do
+    on_macos do
       # The binary is not signed, so remove the quarantine attribute
       # to keep macOS Gatekeeper from blocking it.
-      system_command "/usr/bin/xattr", args: ["-dr", "com.apple.quarantine", "#{staged_path}/aes256cli"]
+      run "/usr/bin/xattr", args: ["-dr", "com.apple.quarantine", "{{staged_path}}/aes256cli"]
     end
   end
 
